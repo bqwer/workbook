@@ -1,0 +1,194 @@
+\documentclass[a5paper, DIV=16, headings=openany, twoside=true,fontsize=10pt, titlepage]{scrreprt}
+\usepackage[T1,T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel} 
+\usepackage{indentfirst}
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{import}
+\usepackage[rgb]{xcolor}
+\usepackage{svg}
+\usepackage{listingsutf8}
+\usepackage{scrhack}
+%\usepackage{pxfonts}
+\usepackage{caption}%[2013/01/01]
+%\usepackage{inconsolata}
+\usepackage{dejavu}
+%\lstset{basicstyle=\ttfamily}
+
+%\usepackage{helvet}
+%\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{light-gray}{gray}{0.97}
+
+\lstset{inputencoding=utf8, extendedchars=\true, basicstyle=\ttfamily}
+\lstset{language=Verilog,
+        captionpos=b,
+        backgroundcolor = \color{light-gray},
+        aboveskip=1em,
+        belowskip=2em}
+
+\setkomafont{disposition}{\normalfont}
+\addtokomafont{chapter}{\large}
+\captionsetup{belowskip=12pt,aboveskip=10pt}
+\captionsetup[lstlisting]{justification=centering}
+
+%\pretolerance=2000
+%\hyphenpenalty=2000
+
+\usepackage{scrlayer-scrpage}
+
+\let\tempmargin\oddsidemargin
+\let\oddsidemargin\evensidemargin
+\let\evensidemargin\tempmargin
+\reversemarginpar
+
+
+\newcommand*\xor{\mathbin{\oplus}}
+\newcommand{\quotes}[1]{«#1»}
+
+
+\begin{document}
+\rofoot*{\pagemark}
+\lofoot*{}
+\refoot*{}
+\lefoot*{\pagemark}
+
+\sloppy
+
+\title{Лабораторная работа №1}
+\author{}
+\subject{}
+\subtitle{Введение в Verilog HDL \\ Логические вентили. Функции алгебры логики. Дешифраторы. Мультиплексоры.}
+\titlehead{}
+\publishers{}
+\date{}
+
+
+\maketitle{}
+
+
+\chapter{Возникновение языков описания цифровой аппаратуры}
+
+\par{Цифровые устройства — это устройства, предназначенные для приёма и обработки цифровых сигналов. Цифровыми называются сигналы, которые можно рассматривать в виде набора дискретных уровней. В цифровых сигналах информация кодируется в виде конкретного уровня напряжения. Как правило выделяется два уровня — логический «0» и логическая «1».}
+
+\par{Цифровые устройства стремительно развиваются с момента изобретения электронной лампы, а затем транзистора. Со временем цифровые устройства стали компактнее, уменьшилось их энергопотребление, возрасла вычислительная мощность. Так же разительно возросла сложность их структуры.}
+
+\par{Графические схемы, которые применялись для проектирования цифровых устройств на ранних этапах развития, уже не могли эффективно использоваться. Потребовался новый инструмент разработки, и таким инструментом стали языки описания аппаратной части цифровых устройств (\foreignlanguage{english}{Hardware Description Languages, HDL}), которые описывали цифровые структуры формализованным языком, чем-то похожим на язык программирования.}
+
+\par{Совершенно новый подход к описанию цифровых схем, реализованный в языках \foreignlanguage{english}{HDL}, заключается в том, что с помощью их помощью можно описывать не только структуру, но и поведение цифрового устройства.Окончательная структура цифрового устройства получается путём обработки таких смешанных описаний специальной программой — синтезатором.}
+
+\par{Такой подход существенно изменил процесс разработки цифровых устройств, превратив громоздкие, тяжело читаемые схемы в относительно простые и доступные описания поведения.}
+
+\par{В данном курсе мы рассмотрим язык описания цифровой аппаратуры \foreignlanguage{english}{Verilog HDL} — одни из наиболее распространённых на текущий момент. И начнём мы с разработки наиболее простых цифровых устройств — логических вентилей.}
+
+\chapter{\foreignlanguage{english}{HDL} описания логических вентилей}
+
+\par{Логические вентили реализуют функции алгебры логики: И, ИЛИ, Исключающее ИЛИ, НЕ. Напомним их таблицы истинности:}
+
+\begin{table}[!htbp]
+\parbox{.45\linewidth}{
+\centering
+\begin{tabular}{c|c|c}
+$a$&$b$&$a \cdot b$\\
+\hline
+$0$ & $0$ & $0$ \\
+$0$ & $1$ & $0$ \\
+$1$ & $0$ & $0$ \\
+$1$ & $1$ & $1$ \\
+\end{tabular}
+\caption{И}
+} \hfill
+\parbox{.45\linewidth}{
+\centering
+\begin{tabular}{c|c|c}
+
+$a$&$b$&$a | b$\\
+\hline
+$0$ & $0$ & $0$ \\
+$0$ & $1$ & $1$ \\
+$1$ & $0$ & $1$ \\
+$1$ & $1$ & $1$ \\
+
+\end{tabular}
+\caption{ИЛИ}
+}\hfill
+\parbox{.45\linewidth}{
+\centering
+\begin{tabular}{c|c|c}
+$a$&$b$&$a \xor b$\\
+\hline
+$0$ & $0$ & $0$ \\
+$0$ & $1$ & $1$ \\
+$1$ & $0$ & $1$ \\
+$1$ & $1$ & $0$ \\
+\end{tabular}
+\caption{Исключающее ИЛИ}
+}\hfill
+\parbox{.45\linewidth}{
+\centering
+\begin{tabular}{c|c}
+$a$&$\bar{a}$\\
+\hline
+$0$ & $1$\\
+$1$ & $0$\\
+\end{tabular}
+\caption{НЕ}
+}
+\end{table}
+
+\par{Начнём знакомиться с \foreignlanguage{english}{Verilog HDL} с описания логического вентиля \quotes{И}. Ниже приведен код, описывающий вентиль с точки зрения его структуры:}
+
+
+%\begin{figure}
+%\centering
+%\def\svgwidth{\columnwidth}
+%\input{test.pdf_tex}
+%\caption{Рукописное изображение с фрагментами текста}
+%\end{figure}
+%WORKING!!!
+
+
+\lstinputlisting[caption={Вентиль \quotes{И}}, ]{and_gate.v}
+
+\par{Описанный выше модуль можно представить как некоторый \quotes{ящик}, в который входит 2 провода с названиями \emph{\quotes{a}} и \emph{\quotes{b}} и из которого выходит один провод с названием \emph{\quotes{result}}. Внутри этого блока результат выполнения операции \quotes{И} (в синтаксисе Verilog записывается как \quotes{\&}) над входами соединяют с выходом.}
+\par{Схемотично изобразим этот модуль:}
+
+\begin{figure}[H]
+\centering
+\def\svgwidth{\columnwidth}
+\includesvg{pict_1_1}
+\caption{Структура модуля \foreignlanguage{english}{\quotes{and\_gate}}}
+\end{figure}
+%\begin{figure}
+%\centering
+%\def\svgwidth{\columnwidth}
+%\includesvg{picture_1_1}
+%\caption{Рукописное изображение с фрагментами текста}
+%\end{figure}
+
+
+%\begin{figure}
+%  \centering
+	%\input{test.pdf_tex}
+%\end{figure}
+
+
+%\begin{figure}
+%  \centering
+%  \def\svgwidth{\columnwidth}
+%    \resizebox{\textwidth}{!}{\input{test.pdf_tex}}
+%  \caption{Рукописное изображение}
+%  \label{fig:illustration}
+%\end{figure}
+
+
+%\begin{figure}[!htb]
+%\centering
+%\include{test.eps_tex}
+%\caption{Digraph.}
+%\label{fig:digraph}
+%\end{figure}
+
+\end{document}
