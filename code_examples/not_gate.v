@@ -1,5 +1,5 @@
 module not_gate(
-	input a,
+	input  a,
 	output result)
 
 assign result = ~a;

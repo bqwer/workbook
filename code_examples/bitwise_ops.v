@@ -5,7 +5,7 @@ module bitwise_ops(
 	output [2:0] c);
 
 assign a = x[5:1];
-assign b = x[5] | x[7];
+assign b = x[5]   | x[7];
 assign c = x[7:5] ^ x[2:0];
 
 endmodule
