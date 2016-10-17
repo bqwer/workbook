@@ -1,0 +1,7 @@
+*.pdf
+!workbook.pdf
+*.pdf_tex
+*.log
+*.aux
+*.fdb_latexmk
+*.synctex.gz
