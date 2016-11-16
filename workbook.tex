@@ -1,4 +1,4 @@
-\documentclass[a5paper, DIV=16, headings=openany, twoside=true,fontsize=10pt, titlepage]{scrreprt}
+\documentclass[a5paper, DIV=14, headings=openany, twoside=true,fontsize=10pt, titlepage]{scrreprt}
 \usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english, russian]{babel} 
@@ -21,6 +21,7 @@
 %\renewcommand{\familydefault}{\sfdefault}
 
 \definecolor{light-gray}{gray}{0.97}
+\renewcommand*\chapterformat{}
 
 \lstset{inputencoding=utf8, extendedchars=\true, basicstyle=\ttfamily}
 \lstset{language=Verilog,
@@ -30,7 +31,7 @@
         belowskip=1em}
 
 \setkomafont{disposition}{\normalfont}
-\addtokomafont{chapter}{\large}
+%\addtokomafont{chapter}{\large}
 \captionsetup{belowskip=10pt,aboveskip=8pt}
 \captionsetup[lstlisting]{justification=centering}
 
@@ -48,7 +49,6 @@
 \newcommand*\xor{\mathbin{\oplus}}
 \newcommand{\quotes}[1]{«#1»}
 
-
 \begin{document}
 \rofoot*{\pagemark}
 \lofoot*{}
@@ -57,10 +57,10 @@
 
 \sloppy
 
-\title{Лабораторная работа №1}
+\title{Лабораторный практикум}
 \author{}
 \subject{}
-\subtitle{Введение в Verilog HDL \\ Логические вентили. Функции алгебры логики. Дешифраторы. Мультиплексоры.}
+\subtitle{\quotes{Проектирование цифровых устройств с помощью Verilog HDL}}
 \titlehead{}
 \publishers{}
 \date{}
@@ -69,7 +69,8 @@
 \maketitle{}
 
 
-\chapter{Возникновение языков описания цифровой аппаратуры}
+\chapter{Лабораторная работа №1\\Введение в Verilog HDL} 
+\section{Возникновение языков описания цифровой аппаратуры}
 
 \par{Цифровые устройства — это устройства, предназначенные для приёма и обработки цифровых сигналов. Цифровыми называются сигналы, которые можно рассматривать в виде набора дискретных уровней. В цифровых сигналах информация кодируется в виде конкретного уровня напряжения. Как правило выделяется два уровня — логический «0» и логическая «1».}
 
@@ -83,7 +84,7 @@
 
 \par{В данном курсе мы рассмотрим язык описания цифровой аппаратуры \foreignlanguage{english}{Verilog HDL} — одни из наиболее распространённых на текущий момент. И начнём мы с разработки наиболее простых цифровых устройств — логических вентилей.}
 
-\chapter{\foreignlanguage{english}{HDL} описания логических вентилей}
+\section{\foreignlanguage{english}{HDL} описания логических вентилей}
 
 \par{Логические вентили реализуют функции алгебры логики: И, ИЛИ, Исключающее ИЛИ, НЕ. Напомним их таблицы истинности:}
 
@@ -140,6 +141,7 @@ $1$ & $0$\\
 
 \par{Начнём знакомиться с \foreignlanguage{english}{Verilog HDL} с описания логического вентиля \quotes{И}. Ниже приведен код, описывающий вентиль с точки зрения его структуры:}
 
+\newpage
 \lstinputlisting[caption={Модуль, описывающий вентиль \quotes{И}}, ]{./code_examples/and_gate.v}
 
 \par{Описанный выше модуль можно представить как некоторый \quotes{ящик}, в который входит 2 провода с названиями \emph{\quotes{\foreignlanguage{english}{a}}} и \emph{\quotes{\foreignlanguage{english}{b}}} и из которого выходит один провод с названием \emph{\quotes{\foreignlanguage{english}{result}}}. Внутри этого блока результат выполнения операции \quotes{И} (в синтаксисе Verilog записывается как \quotes{\&}) над входами соединяют с выходом.}
@@ -166,14 +168,16 @@ $1$ & $0$\\
 
 \par{В качестве входов, выходов и внутренних соединений в блоках могут использоваться шины — группы проводов. Ниже приведен пример работы с шинами:}
 
+\newpage
 \lstinputlisting[caption={Модуль, описывающий побитовое \quotes{ИЛИ} \\ между двумя шинами}, ]{./code_examples/bus_or.v}
 
 \par{Это описание описывает побитовое \quotes{ИЛИ} между двумя шинами по 8 бит. То есть описываются восемь логических вентилей \quotes{ИЛИ}, каждый из которых имеет на входе соответствующие разряды из шины \emph{\quotes{\foreignlanguage{english}{x}}} и шины \emph{\quotes{\foreignlanguage{english}{y}}}.}
 
 \par{При использовании шин можно в описании использовать конкретные биты шины и группы битов. Для этого используют квадратные скобки после имени шины:}
 
-\lstinputlisting[caption={Модуль демонстрирующий \\ битовую адресацию шин}, ]{./code_examples/bitwise_ops.v}
+\lstinputlisting[caption={Модуль, демонстрирующий \\ битовую адресацию шин}, ]{./code_examples/bitwise_ops.v}
 
+\newpage
 \par{Такому описанию соответствует следующая структурная схема:}
 
 \begin{figure}[H]
@@ -182,5 +186,8 @@ $1$ & $0$\\
 \includesvg{pict_1_2}
 \caption{Структура модуля \foreignlanguage{english}{\quotes{bitwise\_ops}}}
 \end{figure}
+
+\chapter{Лабораторная работа №6\\FLASH память} 
+\section{Возникновение языков описания цифровой аппаратуры}
 
 \end{document}
