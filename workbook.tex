@@ -11,10 +11,12 @@
 \usepackage{svg}
 \usepackage{listingsutf8}
 \usepackage{scrhack}
+%\usepackage{float}
 %\usepackage{pxfonts}
 \usepackage{caption}%[2013/01/01]
 %\usepackage{inconsolata}
 \usepackage{dejavu}
+\usepackage[justification=centering]{caption}
 %\lstset{basicstyle=\ttfamily}
 \usepackage{varwidth}
 \definecolor{light-gray}{gray}{0.97}
@@ -37,8 +39,8 @@
 \setkomafont{disposition}{\normalfont}
 %\addtokomafont{chapter}{\large}
 \captionsetup{belowskip=10pt,aboveskip=8pt}
-\captionsetup[lstlisting]{justification=centering}
-
+%\captionsetup[lstlisting]{justification=centering}
+%\lstloadlanguages{Verilog}
 %\pretolerance=2000
 %\hyphenpenalty=2000
 
@@ -147,7 +149,9 @@ $1$ & $0$\\
 
 \par{Начнём знакомиться с \eng{Verilog HDL} с описания логического вентиля \quotes{И}. Ниже приведен код, описывающий вентиль с точки зрения его структуры:}
 
+\begin{minipage}{\linewidth}
 \lstinputlisting[caption={Модуль, описывающий вентиль \quotes{И}}]{./code_examples/and_gate.v}
+\end{minipage}
 
 \par{Описанный выше модуль можно представить как некоторый \quotes{ящик}, в который входит 2 провода с названиями \emph{\qeng{a}} и \emph{\qeng{b}} и из которого выходит один провод с названием \emph{\qeng{result}}. Внутри этого блока результат выполнения операции \quotes{И} (в синтаксисе Verilog записывается как \quotes{\&}) над входами соединяют с выходом.}
 \par{Схемотично изобразим этот модуль:}
@@ -162,25 +166,39 @@ $1$ & $0$\\
 %\begin{minipage}{\linewidth}
 \par{Аналогично опишем все оставшиеся вентили:}
 
+\begin{minipage}{\linewidth}
 \lstinputlisting[caption={Модуль, описывающий вентиль \quotes{ИЛИ}}]{./code_examples/or_gate.v}
-\lstinputlisting[caption={Модуль, описывающий вентиль \quotes{Исключающее ИЛИ}}]{./code_examples/xor_gate.v}
+\end{minipage}
+\begin{minipage}{\linewidth}
+\lstinputlisting[caption={Модуль, описывающий вентиль \mbox{\quotes{Исключающее ИЛИ}}}]{./code_examples/xor_gate.v}
+\end{minipage}
+\begin{minipage}{\linewidth}
 \lstinputlisting[caption={Модуль, описывающий вентиль \quotes{НЕ}}]{./code_examples/not_gate.v}
+\end{minipage}
 
 \par{В проектировании цифровых устройств логические вентили наиболее часто используются для формулировки и проверки сложных условий, например:}
 
+\begin{minipage}{\linewidth}
 \lstinputlisting[caption={Пример использования логических вентилей}, ]{./code_examples/logic_gatex_example.v}
+\end{minipage}
 
 \par{Условие будет выполняться либо когда \emph{не} выполнено условие \emph{\qeng{c}}, либо когда одновременно выполняются условия \emph{\qeng{a}} и \emph{\qeng{b}}. \emph{Здесь и далее под условием понимается логический сигнал, отражающий его истинность.}}
 \par{В качестве входов, выходов и внутренних соединений в блоках могут использоваться шины — группы проводов. Ниже приведен пример работы с шинами:}
 
-\lstinputlisting[caption={Модуль, описывающий побитовое \quotes{ИЛИ} между двумя шинами}, ]{./code_examples/bus_or.v}
+\begin{minipage}{\linewidth}
+\lstinputlisting[caption={Модуль, описывающий побитовое \quotes{ИЛИ} \mbox{между двумя шинами}}, ]{./code_examples/bus_or.v}
+\end{minipage}
 
 \par{Это описание описывает побитовое \quotes{ИЛИ} между двумя шинами по 8 бит. То есть описываются восемь логических вентилей \quotes{ИЛИ}, каждый из которых имеет на входе соответствующие разряды из шины \emph{\qeng{x}} и шины \emph{\qeng{y}}.}
 
 \par{При использовании шин можно в описании использовать конкретные биты шины и группы битов. Для этого используют квадратные скобки после имени шины:}
 
+\begin{minipage}{\linewidth}
+\lstinputlisting[caption={Модуль, демонстрирующий \mbox{битовую адресацию шин}}, ]{./code_examples/bitwise_ops.v}
+\end{minipage}
 
-\begin{samepage}
+%\begin{samepage}
+\begin{minipage}{\textwidth}
 \par{Такому описанию соответствует следующая структурная схема:}
 
 \begin{figure}[H]
@@ -190,7 +208,8 @@ $1$ & $0$\\
 \caption{Структура модуля \qeng{bitwise\_ops}}
 \end{figure}
 
-\end{samepage}
+%\end{samepage}
+\end{minipage}
 
 \begin{figure}[H]
 \begin{tikztimingtable}[%
@@ -226,6 +245,14 @@ DEVSEL     & 2U 6L H\\
 \par{На данный момент наиболее широко используемая энергонезависимая память - это память типа \eng{FLASH}.}
 \par{В качестве элемента хранения информации такая память использует транзистор с плавающим затвором, где состояние затвора определяет бит хранимой информации.}
 %\includesvg{pict_6_1}
+\begin{figure}[H]
+\centering
+\def\svgwidth{\columnwidth}
+\includesvg{no_image}
+\caption{Ячейка \eng{FLASH}-памяти}
+\end{figure}
+
+
 \begin{samepage}
 \par{Из-за использования транзистора с плавающим затвором, у \eng{FLASH}-памяти есть характерные особенности:
   \begin{itemize}
@@ -235,4 +262,6 @@ DEVSEL     & 2U 6L H\\
     \item Чтение также приводит к деградации ячеек памяти, но в меньшей степени.
   \end{itemize}}
 \end{samepage}
+
+\par{Из-за физических процессов протекающих в транзисторах во время записи значений в память и очистке содержимого.}
 \end{document}
