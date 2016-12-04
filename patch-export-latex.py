@@ -17,16 +17,16 @@ import os.path
 import re
 
 def patch(pdftex):
-    with open(pdftex, 'r', encoding='utf8') as f:
+    with open(pdftex, 'r') as f:
         content = f.read()
     content = re.sub('.*\\\\put\(0\,0\)\{\\\\includegraphics\[width=\\\\unitlength\,page=(?!1).*', '', content)
     content = re.sub('.*\\\\put\(0\,0\)\{\\\\includegraphics\[width=\\\\unitlength\,page=\d{2}.*', '', content)
     pdfname = os.path.basename(pdftex).replace('pdf_tex', 'pdf')
     pdf = pdftex.replace('pdf_tex', 'pdf')
     content = content.replace(pdfname, pdf)
-    with open(pdftex, 'w', encoding='utf8') as f:
+    with open(pdftex, 'w') as f:
         f.write(content)
-    print( 'fin' )
+    print 'fin'
 
 if __name__ == '__main__':
     patch(sys.argv[1])
