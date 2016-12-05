@@ -4,6 +4,7 @@ PIC_TEX=$(PIC_PDF:.pdf=.pdf_tex)
 TARGET=workbook.pdf
 SOURCES=$(wildcard *.tex)
 .SUFFIXES: .svg .pdf
+.PHONY: all clean
 
 all: $(TARGET) 
 	evince $(TARGET)
@@ -11,21 +12,17 @@ all: $(TARGET)
 $(TARGET): .patched $(SOURCES)
 	latexmk
 
-#patch: .patch.done 
-.patched: $(PIC_TEX) 
-	$(foreach f, $(PIC_TEX), python ./patch-export-latex.py $(f);)
+.patched: $(PIC_TEX)
+	$(foreach f, $?, python ./patch-export-latex.py $(f);)
 	@touch .patched
-#patch: $(PIC_TEX) 
-#	@echo "patch"
-#	$(foreach f, $^, python ./patch-export-latex.py $(f);)
 
-$(PIC_TEX): $(PIC_PDF)
+$(PIC_TEX): $(PIC_PDF);
 
 .svg.pdf:
 	inkscape -D -z --file=$< --export-pdf=$@ --export-latex
 
 clean:
-	rm $(PIC_TEX)
-	rm $(PIC_PDF)
-	rm .patched
+	rm -f $(PIC_TEX)
+	rm -f $(PIC_PDF)
+	rm -f .patched
 	latexmk -c
