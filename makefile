@@ -1,16 +1,22 @@
 PICTURES=$(wildcard *.svg)
 PIC_PDF=$(PICTURES:.svg=.pdf)
 PIC_TEX=$(PIC_PDF:.pdf=.pdf_tex)
+TARGET=workbook.pdf
 .SUFFIXES: .svg .pdf
 
-all: patch 
-	latexmk
-	evince workbook.pdf
+all: $(TARGET) 
+	evince $(TARGET)
 
-patch: .patch.done 
-.patch.done: $(PIC_TEX) 
+$(TARGET): .patched
+	latexmk
+
+#patch: .patch.done 
+.patched: $(PIC_TEX) 
 	$(foreach f, $(PIC_TEX), python ./patch-export-latex.py $(f);)
-	@touch .patch.done
+	@touch .patched
+#patch: $(PIC_TEX) 
+#	@echo "patch"
+#	$(foreach f, $^, python ./patch-export-latex.py $(f);)
 
 $(PIC_TEX): $(PIC_PDF)
 
@@ -20,5 +26,5 @@ $(PIC_TEX): $(PIC_PDF)
 clean:
 	rm $(PIC_TEX)
 	rm $(PIC_PDF)
-	rm .patch.done
+	rm .patched
 	latexmk -c
