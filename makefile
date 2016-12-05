@@ -2,12 +2,13 @@ PICTURES=$(wildcard *.svg)
 PIC_PDF=$(PICTURES:.svg=.pdf)
 PIC_TEX=$(PIC_PDF:.pdf=.pdf_tex)
 TARGET=workbook.pdf
+SOURCES=$(wildcard *.tex)
 .SUFFIXES: .svg .pdf
 
 all: $(TARGET) 
 	evince $(TARGET)
 
-$(TARGET): .patched
+$(TARGET): .patched $(SOURCES)
 	latexmk
 
 #patch: .patch.done 
