@@ -7,7 +7,7 @@ SOURCES=$(wildcard *.tex)
 .PHONY: all clean
 
 all: $(TARGET) 
-	evince $(TARGET)
+	mupdf $(TARGET)
 
 $(TARGET): .patched $(SOURCES)
 	latexmk
