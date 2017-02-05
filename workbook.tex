@@ -274,10 +274,10 @@ $1$ & $0$\\
 \setlength{\parindent}{15pt}
 \setlength{\parskip}{0pt}
 \par{Возможные форматы:
-\begin{itemize}[noitemsep,topsep=0pt]
-  \item b – бинарный, двоичный
-  \item h – шестнадцатеричный
-  \item d – десятичный
+  \begin{itemize}[noitemsep,topsep=0pt, after=\vspace{2pt}]
+  \item b – бинарный, двоичный;
+  \item h – шестнадцатеричный;
+  \item d – десятичный.
 \end{itemize}}
 \end{minipage}
 
@@ -288,8 +288,8 @@ $1$ & $0$\\
   \lstinputlisting[caption={Описание дешифратора на языке \eng{Verilog HDL}}, ]{./code_examples/decoder.v}
 \end{minipage}
 
-\par{Теперь нам удалось компактно записать четыре функцииб каждая от трёх переменных:
-\begin{itemize}[noitemsep,topsep=5pt,label={}]
+\par{Теперь нам удалось компактно записать четыре функции, каждая от трёх переменных:
+\begin{itemize}[noitemsep,topsep=2pt,label={}]
   \item $y_0=f(x_2,x_1,x_0);$
   \item $y_1=f(x_2,x_1,x_0);$
   \item $y_2=f(x_2,x_1,x_0);$
@@ -346,8 +346,7 @@ $1$ & $0$\\
 
 \par{Приведём для наглядности таблицу, задающую ФАЛ для одного бита выходного вектора (число ФАЛ в мультиплексоре и, следовательно, число таблиц, равняется числу бит в выходном векторе). Для краткости выпишем таблицу наборами строк вида: $f(s_1, s_0, a_0, b_0, c_0, d_0) = y_0$ в четыре столбца.}
 \par{Обратите внимание, что в качестве старших двух бит входного вектора для удобства записи и анализа мы выбрали переменные \quotes{управляющего} сигнала, а выделение показывает какая переменная \quotes{поступает} на выход функции $f$:}
-\addvbuffer[12pt 8pt]{
-\begin{tabular}{ c c c c}
+\begin{longtable}{ c c c c}
 
   $f(00\bm{0}000) = 0$ & 
   $f(010\bm{0}00) = 0$ & 
@@ -428,8 +427,7 @@ $1$ & $0$\\
   $f(011\bm{1}11) = 1$ & 
   $f(1011\bm{1}1) = 1$ & 
   $f(11111\bm{1}) = 1$ \\ 
-\end{tabular}
-}
+\end{longtable}
 
 % \begin{figure}[H]
 % \begin{tikztimingtable}[%
