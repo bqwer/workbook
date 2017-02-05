@@ -51,11 +51,13 @@
 
 \setkomafont{disposition}{\normalfont}
 %\addtokomafont{chapter}{\large}
-\captionsetup{belowskip=8pt,aboveskip=8pt}
+\captionsetup{belowskip=0pt,aboveskip=8pt}
 %\captionsetup[lstlisting]{justification=centering}
 %\lstloadlanguages{Verilog}
 %\pretolerance=2000
 %\hyphenpenalty=2000
+\usepackage{layouts}
+\setlength{\intextsep}{0.5\baselineskip plus 0.1\baselineskip minus 0.1\baselineskip}
 
 \usepackage{scrlayer-scrpage}
 
@@ -251,8 +253,15 @@ $1$ & $0$\\
  
 \par{Остановимся подробнее на новых синтаксических конструкциях:}
 \par{Описание нашего модуля начинается с создания трёхбитной шины \qeng{x\_bus} на строке 7.}
-\par{После создания шины \qeng{x\_bus}, на она подключается к объединению проводов \qeng{x2}, \qeng{x1} и \qeng{x0} с помощью оператора \eng{assign} на строке 8.}
+\par{После создания шины \qeng{x\_bus}, на она подключается к объединению проводов \qeng{x2}, \qeng{x1} и \qeng{x0} с помощью оператора \eng{assign} как показано на Рис. \ref{fig:assign}.}
 
+\begin{figure}[H]
+\centering
+\def\svgwidth{\columnwidth}
+\includesvg{assign}
+  \caption{Действие оператора \kword{assign}}
+\label{fig:assign}
+\end{figure}
  
 \par{Затем начинается функциональный блок \kword{always}, на котором мы остановимся подробнее.}
 \par{\eng{Verilog HDL} описывает цифровую аппаратуру, которая существует вся одновременно, но инструменты анализа и синтеза описаний являются программами и выполняются последовательно на компьютере. Так возникла необходимость последовательной программе «рассказать» про то, какие события приводят к срабатыванию тех или иных участков кода. Сами эти участки назвали процессами. Процессы обозначаются ключевым словом \kword{always}.}
