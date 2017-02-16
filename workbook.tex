@@ -1,3 +1,6 @@
+\pdfobjcompresslevel=0
+\pdfcompresslevel=0
+
 \documentclass[a5paper, DIV=14, headings=openany, twoside=true,fontsize=10pt, titlepage]{scrreprt}
 \usepackage[T1,T2A]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -36,6 +39,8 @@
 
 \usepackage{tikz-timing}
 %\usetikztiminglibrary[rising arrows]{clockarrows}
+\tikzset{timing/z/.style={black}}
+\tikzset{timing/Z/.style={black}}
 \usetikztiminglibrary[arrow tip=latex, rising arrows]{clockarrows}
 \usetikztiminglibrary{nicetabs}
 \usepackage{xparse} % NewDocumentCommand, IfValueTF, IFBooleanTF
@@ -78,6 +83,21 @@
 \usepackage{parskip}
 \setlength{\parindent}{15pt}
 \setlength{\parskip}{2pt}
+
+%Patch for Tikz
+\makeatletter
+\begingroup\expandafter\expandafter\expandafter\endgroup
+\expandafter\ifx\csname pgfutil@addpdfresource@extgs\endcsname\relax
+\else
+  \AtBeginDocument{%
+    % \pgf@sys@addpdfresource@extgs@plain{%
+    \pgfutil@addpdfresource@extgs{%
+      \TRP@list
+    }%
+  }%  
+  \let\TRP@addresource\relax
+\fi
+\makeatother
 
 \begin{document}
 \rofoot*{\pagemark}
@@ -415,30 +435,7 @@
 
 \section*{Пример задания лабораторной работы}
 \par{Пример формируется...}
-% \begin{figure}[H]
-% \begin{tikztimingtable}[%
-%     timing/dslope=0.1,
-%     timing/.style={x=5ex,y=2ex},
-%     x=5ex,
-%     timing/rowdist=3ex,
-%     timing/name/.style={font=\sffamily\scriptsize}
-% ]
-% CLK         & 18{c} \\
-% FRAME     & 2u 6L H U \\
-% \nsig{AD} [31:0]   & 2u 1D{addr} 1U{} 1D{$d_1$} D{$d_1 '$} D{$d_2$} 2D{$d_3$} U \\
-% C/BE[3:0] & 2u 1D{0010} 6D{BE\#} U  \\
-% IRDY      & UU 4L HLH \\
-% TRDY       & UU HLH 3L H \\
-% DEVSEL     & 2U 6L H\\
-% \extracode
-% \begin{pgfonlayer}{background}
-% \begin{scope}[semitransparent ,semithick]
-% \vertlines[darkgray,dotted]{0.5,1.5 ,...,8.0}
-% \end{scope}
-% \end{pgfonlayer}
-% \end{tikztimingtable}
-% \caption{Временная диаграмма операции чтения шины \eng{PCI}}
-% \end{figure}
+
 
 \chapter{Лабораторная работа №6\\\eng{FLASH} память} 
 
@@ -552,6 +549,34 @@
   \caption{Временные характеристики операции чтения \eng{S29AL032D}}
   \label{table:flash_read_timings}
 \end{table}
+
+\par{Как мы уже знаем, единственным источником информации о времени для цифрового устройства может являться только сигнал синхронизации, заранее известной частоты. Привяжем времена, упомянутые в Таблице \ref{table:flash_read_timings} к тактовому сигналу частоты 50 МГц. Полученная временная диаграмма показана на Рис. \ref{figure:clocked_flash_read}}
+
+\begin{figure}[H]
+\begin{tikztimingtable}[%
+    timing/dslope=0.1,
+    timing/.style={x=5ex,y=2ex},
+    x=5ex,
+    timing/rowdist=3ex,
+    timing/name/.style={font=\sffamily\scriptsize},
+]
+  CLK50        & 18{c} \\
+  ADDRESS      & 2u 4D{Read\ Addr.} 2u \\
+  \nsig{CE}    & 2H 4L 4H \\
+  \nsig{OE}    & 3H 3L 4H \\
+  \nsig{WE}    & 1L 5H 4L \\
+  \nsig{RESET} & 10H \\
+  DATA         & 4Z 2D{Output\ Data} 2Z \\
+  RY/\nsig{BY} & 10H \\
+\extracode
+\begin{pgfonlayer}{background}
+\begin{scope}[semitransparent ,semithick]
+\vertlines[darkgray,dotted]{0.5,1.5 ,...,8.0}
+\end{scope}
+\end{pgfonlayer}
+\end{tikztimingtable}
+\caption{Временная диаграмма операции чтения шины \eng{PCI}}
+\end{figure}
 
 \subsection{Операция записи}
 \subsection{Операция очистки сектора}
