@@ -1,4 +1,3 @@
-…
 reg a;
 reg b;
 
@@ -13,4 +12,3 @@ always @(posedge clk) begin
     end
     else b <= a;
 end
-…

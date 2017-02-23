@@ -17,4 +17,3 @@ always @(a,b,c,d,s) begin
 end;
 
 endmodule;
-
