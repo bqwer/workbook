@@ -1,4 +1,4 @@
-PICTURES=$(wildcard *.svg)
+PICTURES=$(wildcard images/*/*.svg) $(wildcard *.svg)
 PIC_PDF=$(PICTURES:.svg=.pdf)
 PIC_TEX=$(PIC_PDF:.pdf=.pdf_tex)
 TARGET=workbook.pdf
