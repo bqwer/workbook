@@ -72,7 +72,7 @@
 
 \noindent
 \begin{minipage}{\linewidth}
- \lstinputlisting[caption={Модуль, описывающий вентиль \quotes{И}}]{./code_examples/and_gate.v}
+ \lstinputlisting[caption={Модуль, описывающий вентиль \quotes{И}}]{./code_examples/lab_1/and_gate.v}
 \end{minipage}
 
 \par{Описанный выше модуль можно представить как некоторый \quotes{ящик}, в который входит 2 провода с названиями \emph{\qeng{a}} и \emph{\qeng{b}} и из которого выходит один провод с названием \emph{\qeng{result}}. Внутри этого блока результат выполнения операции \quotes{И} (в синтаксисе Verilog записывается как \quotes{\&}) над входами соединяют с выходом.}
@@ -89,33 +89,33 @@
 
 \noindent
 \begin{minipage}{\linewidth}
-  \lstinputlisting[caption={Модуль, описывающий вентиль \quotes{ИЛИ}}]{./code_examples/or_gate.v}
+  \lstinputlisting[caption={Модуль, описывающий вентиль \quotes{ИЛИ}}]{./code_examples/lab_1/or_gate.v}
 \end{minipage}
 
 \noindent
 \begin{minipage}{\linewidth}
-  \lstinputlisting[caption={Модуль, описывающий вентиль \mbox{\quotes{Исключающее ИЛИ}}}]{./code_examples/xor_gate.v}
+  \lstinputlisting[caption={Модуль, описывающий вентиль \mbox{\quotes{Исключающее ИЛИ}}}]{./code_examples/lab_1/xor_gate.v}
 \end{minipage}
 
 \noindent
 \begin{minipage}{\linewidth}
-  \lstinputlisting[caption={Модуль, описывающий вентиль \quotes{НЕ}}]{./code_examples/not_gate.v}
+  \lstinputlisting[caption={Модуль, описывающий вентиль \quotes{НЕ}}]{./code_examples/lab_1/not_gate.v}
 \end{minipage}
 
 \par{В проектировании цифровых устройств логические вентили наиболее часто используются для формулировки и проверки сложных условий, например:}
 
-\lstinputlisting[caption={Пример использования логических вентилей}]{./code_examples/logic_gatex_example.v}
+\lstinputlisting[caption={Пример использования логических вентилей}]{./code_examples/lab_1/logic_gatex_example.v}
 
 \par{Условие будет выполняться либо когда \emph{не} выполнено условие \emph{\qeng{c}}, либо когда одновременно выполняются условия \emph{\qeng{a}} и \emph{\qeng{b}}. \emph{Здесь и далее под условием понимается логический сигнал, отражающий его истинность.}}
 \par{В качестве входов, выходов и внутренних соединений в блоках могут использоваться шины — группы проводов. Ниже приведен пример работы с шинами:}
 
-\lstinputlisting[caption={Модуль, описывающий побитовое \quotes{ИЛИ} \mbox{между двумя шинами}},float,floatplacement=H]{./code_examples/bus_or.v}
+\lstinputlisting[caption={Модуль, описывающий побитовое \quotes{ИЛИ} \mbox{между двумя шинами}},float,floatplacement=H]{./code_examples/lab_1/bus_or.v}
 
 \par{Это описание описывает побитовое \quotes{ИЛИ} между двумя шинами по 8 бит. То есть описываются восемь логических вентилей \quotes{ИЛИ}, каждый из которых имеет на входе соответствующие разряды из шины \emph{\qeng{x}} и шины \emph{\qeng{y}}.}
 
 \par{При использовании шин можно в описании использовать конкретные биты шины и группы битов. Для этого используют квадратные скобки после имени шины:}
 
-\lstinputlisting[caption={Модуль, демонстрирующий \mbox{битовую адресацию шин}}, ]{./code_examples/bitwise_ops.v}
+\lstinputlisting[caption={Модуль, демонстрирующий \mbox{битовую адресацию шин}}, ]{./code_examples/lab_1/bitwise_ops.v}
 
 \par{Такому описанию соответствует следующая структурная схема, приведённая на Рис. \ref{fig:bitwiseops}}
 
@@ -135,7 +135,7 @@
 
 \par{Используя эту возможность, опишем таблично-заданную ФАЛ на \eng{Verilog HDL}:}
 
-\lstinputlisting[caption={Пример описания таблично-заданной ФАЛ на \eng{Verilog HDL}}, ]{./code_examples/function_example.v}
+\lstinputlisting[caption={Пример описания таблично-заданной ФАЛ на \eng{Verilog HDL}}, ]{./code_examples/lab_1/function_example.v}
 
 \par{Описание, приведённое выше, определяет $y$, как таблично-заданную функцию, которая равна нулю на наборах 0, 2, 5, 6, 7 и единице на всех остальных наборах.}
 
@@ -175,7 +175,7 @@
 
 \par{Немного расширив это описание, легко можно определить не одну, а сразу несколько ФАЛ одновременно. Для упрощения записи сразу объединим во входную шину все переменные. В выходную шину объединим значения функций:}
 
-\lstinputlisting[caption={Описание дешифратора на языке \eng{Verilog HDL}}, ]{./code_examples/decoder.v}
+\lstinputlisting[caption={Описание дешифратора на языке \eng{Verilog HDL}}, ]{./code_examples/lab_1/decoder.v}
 
 \par{Теперь нам удалось компактно записать четыре функции, каждая от трёх переменных:
 \begin{itemize}[noitemsep,topsep=2pt,label={}]
@@ -203,7 +203,7 @@
 
 \par{Рассмотрим еще один интересный набор ФАЛ:}
 
-\lstinputlisting[caption={Описание мультиплексора на языке \eng{Verilog HDL}}, ]{./code_examples/multiplexer.v}
+\lstinputlisting[caption={Описание мультиплексора на языке \eng{Verilog HDL}}, ]{./code_examples/lab_1/multiplexer.v}
 
 \par{Что можно сказать об этом описании? Выходной вектор $y$ — это результат работы трёх ФАЛ, каждая из которых является функцией 6 переменных. Так, $y_0 = f(a_0, b_0, c_0, d_0, s_1, s_0)$.}
 
