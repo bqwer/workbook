@@ -197,6 +197,32 @@
 
 \par{Аналогично операции чтения, привяжем форму и времена временной диаграммы записи к тактовому сигналу, частотой 50 МГц. Полученная диаграмма, представлена на Рис. \ref{fig:flash_write_clocked}}
 
+\begin{figure}[H]
+  \centering
+  \begin{tikztimingtable}[%
+          timing/dslope=0.1,
+              timing/.style={x=5ex,y=2ex},
+                  x=5ex,
+                      timing/rowdist=3ex,
+                          timing/name/.style={font=\sffamily\scriptsize},
+                          ]
+                            CLK50        & 10{c} \\
+                              ADDRESS      & .5U 4D{Read\ Addr.} 2u \\
+                                \nsig{CE}    & .5H 1H 3L 1H \\
+                                  \nsig{OE}    & .5H 2H 2L 1H \\
+                                    \nsig{WE}    & .5L 4H L \\
+                                      DATA         & .5Z 3.5Z 0.2Z 0{1.2U}{0.2Z 1D{Data}} .5Z \\
+                                      \extracode
+                                      \begin{pgfonlayer}{background}
+                                        \begin{scope}[semitransparent ,semithick]
+                                          \vertlines[darkgray,dotted]{1.5, 2.5, 3.5}
+                                          \vertlines[red]{0.5,4.5}
+                                        \end{scope}
+                                      \end{pgfonlayer}
+  \end{tikztimingtable}
+  \caption{Временная диаграмма операции чтения \eng{S29AL032D}, привязанная к тактовому сигналу, частотой 50 МГц.}
+  \label{fig:clocked_flash_read}
+\end{figure}
 \par{[Picture goes here]}
 % \begin{figure}[H]
 % \centering
