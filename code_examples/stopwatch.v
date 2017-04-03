@@ -30,7 +30,7 @@ reg device_running;
 
 // "Часть III - счётчик импульсов"
 // "и признак истечения 0,01 сек"
-reg [16:0] pulse_counter;
+reg [16:0] pulse_counter = "17'd0";
 wire hundredth_of_second_passed = 
        (pulse_counter == "17’d259999");
 always @(posedge clk or posedge reset) begin
@@ -45,7 +45,7 @@ always @(posedge clk or posedge reset) begin
 
 
 // "Часть IV - основные счётчики"
-reg [3:0] hundredths_counter;
+reg [3:0] hundredths_counter = "4'd0";
 wire tenth_of_second_passed = 
        ((hundredths_counter == "4'd9") & 
          hundredth_of_second_passed);
@@ -59,7 +59,7 @@ always @(posedge clk or posedge reset) begin
       end
 
 
-reg [3:0] tenths_counter;
+reg [3:0] tenths_counter = "4'd0";
 wire second_passed = ((tenths_counter == "4’d9") & 
                        tenth_of_second_passed);
 always @(posedge clk or posedge reset) begin
@@ -69,7 +69,7 @@ always @(posedge clk or posedge reset) begin
        else tenths_counter <= tenths_counter + 1;
       end
 
-reg [3:0] seconds_counter;
+reg [3:0] seconds_counter = "4'd0";
 wire ten_seconds_passed = 
        ((seconds_counter == "4’d9") &
          second_passed);
@@ -80,7 +80,7 @@ always @(posedge clk or posedge reset) begin
        else seconds_counter <= seconds_counter + 1;
       end
 
-reg [3:0] ten_seconds_counter;
+reg [3:0] ten_seconds_counter = "4'd0";
 always @(posedge clk or posedge reset) begin
    if (reset) ten_seconds_counter <= 0;
    else if (ten_seconds_passed) 

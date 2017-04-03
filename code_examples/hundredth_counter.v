@@ -1,5 +1,5 @@
 //регистр счётчика
-reg [3:0] hundredth_counter;
+reg [3:0] hundredth_counter = "4'd0";
 
 //описание компаратора
 wire tenth_of_second_passed = 

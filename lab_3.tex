@@ -1,4 +1,4 @@
-\chapter{Лабораторная работа №4\\Секундомер} 
+\chapter{Лабораторная работа №3\\Секундомер} 
 
 \par{В прошлых лабораторных работах мы изучили базовые строительные блоки цифровых устройств. Теперь у нас уже достаточно знаний для реализации несложного, но функционально законченного цифрового устройства.}
 
@@ -21,7 +21,12 @@
 \par{Больше никаких входов и выходов не требуется.}
 \par{Общая схема на данный момент выглядит так:}
 
-\par{---------picture---------}
+\begin{figure}[H]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{blackbox_3}
+	\caption{Описание входов и выходов секундомера}
+\end{figure}
 
 \par{Начнём описывать модуль на языке \eng{Verilog}:}
 
@@ -37,13 +42,24 @@
 
 \par{Для того, чтобы отсчитать это количество импульсов подходит единственный из известных нам \quotes{строительных блоков} - счётчик:}
 
-\par{----------picture----------}
+\begin{figure}[H]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{counter_3}
+	\caption{Структура счетчика}
+\end{figure}
+
 
 \par{Как мы уже говорили, счётчик состоит из регистра и сумматора. Чтобы счётчик циклически отсчитывал одну сотую секунды его необходимо обнулить после того, как он отсчитает 260 тысяч тактовых импульсов. В этот же момент нужно выработать сигнал для остальной схемы, что прошла одна сотая секунды.}
 
 \par{Из всех цифровых блоков, которые мы рассмотрели, для реализации задачи сравнения текущего значения счётчика с константой подходит только компаратор. На один из входов компаратора подадим текущее значение счётчика, а на другой вход - константу 260 000.}
 
-\par{----------picture----------}
+\begin{figure}[H]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{count_comp_3}
+	\caption{Структура счетчика с компаратором}
+\end{figure}
 
 \par{Пока значения на входах компаратора будут отличаться, на выходе компаратора будет значение \quotes{0}. Когда значения будут равны, компаратор изменит выход с \quotes{0} на \quotes{1}, это и будет признак того, что прошло 0.01 секунды. Для того, чтобы можно было эффективно использовать сигнал \quotes{прошло 0.01с}, этот сигнал должен иметь длительность равную 1 такту.}
 
@@ -55,11 +71,56 @@
 
 \par{Посмотрите, как будет выглядеть на временной диаграмме как будет работать счётчик если выход компаратора, подключить как сигнал синхронного сброса:}
 
-\par{-----------timing table-----------}
+\begin{figure}[H]
+\centering
+\begin{tikztimingtable}[%
+    timing/dslope=0.1,
+    timing/.style={x=5ex,y=2ex},
+    very thick,
+    x=3ex,
+    timing/rowdist=3.3ex,
+    timing/name/.style={font=\sffamily\scriptsize},
+]
+
+	& 16{c} \\
+	& 0.5D{} D{259997} D{259998} D{259999} D{0} D{1} D{2} D{3} 0.5D{}\\
+	& 2.5L 1H 4.5L\\
+\extracode
+\begin{pgfonlayer}{background}
+\node [align=center,scale=0.6,text width=26ex] at (-8ex, -6ex) {Выход компаратора, подключенный в виде синхронного сброса};
+\begin{scope}[semitransparent ,semithick]
+\end{scope}
+\end{pgfonlayer}
+\end{tikztimingtable}
+\caption{Временная диаграмма работы синхронного счетчика}
+\end{figure}
 
 \par{А так выглядит временная диаграмма, если подключить выход компаратора к входу асинхронного сброса триггера:}
 
-\par{-----------timing table-----------}
+\begin{figure}[H]
+\centering
+\begin{tikztimingtable}[%
+    timing/dslope=0.1,
+    timing/.style={x=5ex,y=2ex},
+    very thick,
+    x=3ex,
+    timing/rowdist=3.3ex,
+    timing/name/.style={font=\sffamily\scriptsize},
+]
+	& 16{c} \\
+	& 0.5D{} D{259996} D{259997} D{259998} 0.3D{} 0.7D{0} D{1} D{2} D{3}0.5D{}\\
+	& 3.5L 0.3H 4.2L\\
+\extracode
+\begin{pgfonlayer}{background}
+\node [align=center,scale=0.6,text width=26ex] at (-8ex, -6ex) {Выход компаратора, подключенный в виде асинхронного сброса};
+\draw [->,thick] (12ex,-8ex) to [out=50,in=190] (16ex,-5ex) to [out=10,in=-100] (18.5ex,-3.3ex);
+\node [align=center,below,scale=0.6,text width=10ex] at (12ex,-8ex) {259999};
+\begin{scope}[semitransparent ,semithick]
+\end{scope}
+\end{pgfonlayer}
+\end{tikztimingtable}
+\caption{Временная диаграмма работы асинхронного счетчика}
+\end{figure}
 
 \par{Выход компаратора, установившись в единицу, моментально сбросит счётчик и, так как значение счётчика изменилось, а значит, изменился и один из входов компаратора, выход компаратора сразу же перейдет в значение \quotes{0}.}
 
@@ -71,7 +132,12 @@
 
 \par{Для этого можно использовать мультиплексор. Схема будет выглядеть следующим образом:}
 
-\par{----------picture---------}
+\begin{figure}[H]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{sync_reset}
+	\caption{Схема реализации синхронного сброса}
+\end{figure}
 
 \par{Если подключить \eng{sync\_reset} к выходу компаратора, то когда счётчик достигнет порогового значения, выход компаратора изменится и переключит мультиплексор. Теперь на выход мультиплексора будет подаваться \quotes{0}. Этот сигнал будет поступать на вход триггера, но запись нового значения произойдет только во время положительного фронта сигнала синхронизации.}
 
@@ -83,7 +149,23 @@
 
 \par{Посмотрите, как выглядит остановка и запуск счётчика в таком случае:}
 
-\par{-----------timing table-----------}
+\begin{figure}[H]
+\centering
+\begin{tikztimingtable}[%
+    timing/dslope=0.1,
+    timing/.style={x=5ex,y=2ex},
+    very thick,
+    x=3ex,
+    timing/rowdist=3.3ex,
+    timing/name/.style={font=\sffamily\scriptsize},
+]
+				& 16{c} \\
+	\eng{device\_running}	& 2.5H 3L 2.5H\\
+	Значение счетчика	& 0.5D{} D{19157} D{19158} 4D{19159} D{19160} 0.5D{}\\
+\extracode
+\end{tikztimingtable}
+\caption{Временная диаграмма работы сигнала \eng{device\_running}}
+\end{figure}
 
 \par{К проектированию и описанию схемы, которая вырабатывала бы сигнал \qeng{device\_running}, мы вернемся позднее.}
 
@@ -91,7 +173,25 @@
 
 \par{Взгляните на временную диаграмму:}
 
-\par{-----------timing table------------}
+\begin{figure}[H]
+\centering
+\begin{tikztimingtable}[%
+    timing/dslope=0.1,
+    timing/.style={x=5ex,y=2ex},
+    very thick,
+    x=3ex,
+    timing/rowdist=3.3ex,
+    timing/name/.style={font=\sffamily\scriptsize},
+]
+
+				& 16{c} \\
+	\eng{device\_running}	& 2.5H 5.5L\\
+				& 0.5D{} D{259997} D{259998} 5.5D{259999}\\
+	Выход компаратора	& 2.6L 5.4H \\
+\extracode
+\end{tikztimingtable}
+\caption{Временная диаграмма работы счетчика}
+\end{figure}
 
 \par{Для того чтобы не допустить такого поведения, можно немного изменить условие, запрещающее работу счётчика. Теперь мы будем дополнительно проверять сигнал с компаратора. И если счётчик в данный момент равен 259999, то запретить его работу будет невозможно.}
 
@@ -99,7 +199,12 @@
 
 \par{Теперь схема счётчика выглядит следующим образом:}
 
-\par{------------picture------------}
+\begin{figure}[H]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{pulse_counter}
+	\caption{Схема счетчика тысячных долей секунды}
+\end{figure}
 
 \par{Когда мы представили схему в виде набора цифровых блоков, мы можем описать её поведение на языке \eng{Verilog}:}
 
@@ -111,13 +216,23 @@
 
 \par{Первый вариант – отсчитывать количество прошедших сотых долей секунды единственным счётчиком. Значение этого счётчика мы можем дешифрировать, чтобы выделить из него количество единиц, десятков, сотен и тысяч прошедших долей секунды, чтобы подать эти значения на дешифраторы семисегментных индикаторов:}
 
-\par{------------picture------------}
+\begin{figure}[H]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{timer_struct_3_1}
+	\caption{Первый пример реализации секундомера}
+\end{figure}
 
 \par{Второй вариант – использовать отдельные счётчики для сотых долей секунды, десятых долей секунды, целых секунд и десятков секунд.}
 
 \par{Т.е. первый счетчик подсчитывает количество прошедших сотых долей секунды от 0 до 9, и, затем обнуляется, вырабатывая сигнал \quotes{прошла десятая доля секунды}. Следующий счётчик, точно также считает уже десятые доли и вырабатывает сигнал \quotes{прошла одна секунда} и так далее.}
 
-\par{------------picture-------------}
+\begin{figure}[H]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{timer_struct_3_2}
+	\caption{Второй пример реализации секундомера}
+\end{figure}
 
 \par{Второй вариант для нас проще в реализации, компактнее, удобнее и понятнее.}
 
@@ -131,7 +246,37 @@
 
 \par{Пока счётчик считал такты, его значение менялось каждый такт. Компаратор просто не мог принять значение 1 более чем на один такт. Теперь ситуация выглядит следующим образом:}
 
-\par{--------------timing table----------------}
+\begin{figure}[H]
+\centering
+\begin{tikztimingtable}[%
+    timing/dslope=0.1,
+    timing/.style={x=3.5ex,y=2ex},
+    very thick,
+    x=3ex,
+    timing/rowdist=3.3ex,
+    timing/coldist=2pt,  
+    timing/name/.style={font=\sffamily\scriptsize},
+]
+	& 11{c} 2{0.5c} 11{c} \\
+	& 0.5D{} D{[scale=0.7]{259997}} D{[scale=0.7]{259998}} D{[scale=0.7]{259999}} D{[scale=0.7]{0}} 1D{[scale=0.7]{1}} 0.5D{} D{[scale=0.7]{259997}} D{[scale=0.7]{259998}} D{[scale=0.7]{259999}} D{[scale=0.7]{0}} D{[scale=0.7]{1}} 0.5D{}\\
+	& 2.5L 1H 4.5L 1H 2.5L\\
+	& 3.5D{[scale=0.7]{8}} 2D{[scale=0.7]{9}} 3.5D{[scale=0.7]{9}} 2.5D{[scale=0.7]{0}} \\
+	& 3.5L 5.5H 2.5L\\
+	& 8L 1H 2.5L\\
+\extracode
+\draw[fill=white,color=white] (20ex,-19ex) rectangle (18.8ex,4ex);
+\begin{pgfonlayer}{background}
+\node [align=right,scale=0.7,text width=22ex] at (-10ex, -3ex) {Счетчик тактов};
+\node [align=right,scale=0.7,text width=22ex] at (-10ex, -6ex) {\quotes{Прошла 0.01с}};
+\node [align=right,scale=0.7,text width=22ex] at (-10ex, -9ex) {Счетчик сотых долей};
+\node [align=right,scale=0.7,text width=22ex] at (-10ex, -12ex) {Выход компаратора счетчика сотых долей};
+\node [align=right,scale=0.7,text width=22ex] at (-10ex, -15ex) {\quotes{Прошла 0.1с}};
+\draw [very thick, color=black] (20.15ex,4ex) -- (20.15ex,-19ex);
+\draw [very thick, color=black] (18.65ex,4ex) -- (18.65ex,-19ex);
+\end{pgfonlayer}
+\end{tikztimingtable}
+\caption{Временная диаграмма работы секундомера}
+\end{figure}
 
 \par{Счетчик будет переключаться каждую 0,01 секунды, 0,1 секунды ,1 секунду или 10 секунд. И выход компаратора будет устанавливаться в 1 на всё время, которое потребуется для переключения счётчика из 9 в ноль. Т.е. в случае счётчика сотых долей секунды потребуется 259999 тактов.}
 
@@ -141,7 +286,12 @@
 
 \par{Схема счётчика практически не изменилась:}
 
-\par{------------------picture------------------}
+\begin{figure}[H]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{hundredth_counter}
+	\caption{Схема счётчика сотых долей секунды}
+\end{figure}
 
 \par{Скорректируем описание её работы на \eng{Verilog}:}
 
@@ -157,7 +307,12 @@
 
 \par{Тогда схема будет абсолютно такой же, как и в лабораторной работе №3 и будет выглядеть следующим образом:}
 
-\par{------------------picture------------------}
+\begin{figure}[H]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{register_2}
+	\caption{Структура схемы синхронизации сигнала}
+\end{figure}
 
 \par{Поведение такой схемы описывается на языке \eng{Verilog} следующим образом:}
 
@@ -171,12 +326,32 @@
 
 \par{Немного подумав над этими вводными, нетрудно составить следующую схему:}
 
-\par{------------------picture------------------}
+\begin{figure}[H]
+	\centering
+	\def\svgwidth{\columnwidth}
+	\includesvg{device_stopped}
+	\caption{Схема переключения сигнала \qeng{device\_running}}
+\end{figure}
 
 \par{Временная диаграмма, которая соответствует работе этого устройства:}
 
-\par{------------------timing table------------------}
-
+\begin{figure}[H]
+\centering
+\begin{tikztimingtable}[%
+    timing/dslope=0.1,
+    timing/.style={x=5ex,y=2ex},
+    very thick,
+    x=3ex,
+    timing/rowdist=3.3ex,
+    timing/name/.style={font=\sffamily\scriptsize},
+]
+					& 15{c} \\
+	\eng{button\_was\_pressed}	& 1.5L 1H 3L 1H 1L\\
+	\eng{device\_running}		& 2.5L 4H 1L\\
+\extracode
+\end{tikztimingtable}
+\caption{Временная диаграмма переключения сигнала \qeng{device\_running}}
+\end{figure}
 
 \par{Описание поведения этой схемы на \eng{Verilog} также не представляет сложности. Выполните его самостоятельно.}
 

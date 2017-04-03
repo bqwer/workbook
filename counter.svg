@@ -12,12 +12,12 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="207"
-   height="137"
-   viewBox="0 0 207.00001 137"
+   height="135"
+   viewBox="0 0 207.00002 135"
    id="svg8068"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="counter.svg">
+   sodipodi:docname="counter_2.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="95.148833"
-     inkscape:cy="65.66582"
+     inkscape:zoom="1.979899"
+     inkscape:cx="34.425969"
+     inkscape:cy="71.738563"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -38,8 +38,8 @@
      inkscape:snap-intersection-paths="true"
      inkscape:object-paths="true"
      units="px"
-     inkscape:window-width="1920"
-     inkscape:window-height="901"
+     inkscape:window-width="1280"
+     inkscape:window-height="870"
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="1"
@@ -66,58 +66,58 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-915.3622)">
+     transform="translate(0,-917.36213)">
     <rect
        style="opacity:1;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.00000012;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect7489"
        width="44.174675"
        height="77.662933"
-       x="63.458515"
-       y="939.71362" />
+       x="63.366188"
+       y="940.57971" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 107.63319,954.22473 40.20373,0"
+       d="m 107.54085,955.09083 40.20373,0"
        id="path8041"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 63.335864,1010.5246 7.65938,-7.6593 -7.65938,-7.6594"
+       d="m 63.243534,1011.3907 7.65938,-7.6593 -7.65938,-7.6594"
        id="path8045"
        inkscape:connector-curvature="0" />
     <circle
        style="opacity:1;fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.00000012;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path8123"
-       cx="165.28641"
-       cy="963.34076"
+       cx="165.19406"
+       cy="964.20685"
        r="19.6875" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 165.2864,968.12794 0,-9.5743"
+       d="m 165.19406,968.99404 0,-9.5743"
        id="path8669"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 170.07355,963.34079 -9.5743,0"
+       d="m 169.98121,964.20689 -9.5743,0"
        id="path8671"
        inkscape:connector-curvature="0" />
     <circle
        style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path12112-9-2-5"
-       cx="125.50738"
-       cy="954.05066"
+       cx="125.41505"
+       cy="954.91675"
        r="3.1257401" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 125.49998,955.68977 0,64.73483 37.75314,0"
+       d="m 125.40764,956.55587 0,64.73483 37.75314,0"
        id="path8690"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 147.83567,972.45501 -9.58255,0 0,67.96959"
+       d="m 147.74333,973.32111 -9.58255,0 0,67.96959"
        id="path8696"
        inkscape:connector-curvature="0" />
     <g
-       transform="translate(-146.61462,820.88802)"
+       transform="translate(-146.70695,821.75412)"
        ns0:text="reg"
        ns0:preamble="/home/bqwer/workbook git/textext_preamble.tex"
        id="g3366">
@@ -200,7 +200,7 @@
        id="g3461"
        ns0:preamble="/home/bqwer/workbook git/textext_preamble.tex"
        ns0:text="count"
-       transform="translate(-58.534962,888.43614)">
+       transform="translate(-58.62729,889.30224)">
       <defs
          id="defs3463">
         <g
@@ -311,7 +311,7 @@
       </g>
     </g>
     <g
-       transform="translate(-215.6829,847.33639)"
+       transform="translate(-215.77524,848.20249)"
        ns0:text="EN"
        ns0:preamble="/home/bqwer/workbook git/textext_preamble.tex"
        id="g3610">
@@ -377,7 +377,7 @@
        id="g3770"
        ns0:preamble="/home/bqwer/workbook git/textext_preamble.tex"
        ns0:text="CLK"
-       transform="translate(-221.92001,871.80956)">
+       transform="translate(-222.01235,872.67566)">
       <defs
          id="defs3772">
         <g
@@ -454,7 +454,7 @@
       </g>
     </g>
     <g
-       transform="translate(-141.92143,907.85635)"
+       transform="translate(-142.01376,908.72245)"
        ns0:text="R"
        ns0:preamble="/home/bqwer/workbook git/textext_preamble.tex"
        id="g3967">
@@ -501,29 +501,24 @@
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.55781603;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 63.377544,978.545 -38.64235,0"
+       d="m 63.285214,979.4111 -38.642347,0"
        id="path8033-0"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.55781603;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 63.377544,1002.8653 -38.642352,0"
+       d="m 63.285214,1003.7314 -38.642357,0"
        id="path8033-0-6"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.49934214;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 85.719245,1033.4307 0,-15.9733"
+       d="m 85.626914,1034.2968 0,-15.9733"
        id="path3342-3-2"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.00000024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 182.75365,954.22471 20.49946,0 0,-33.80011 -178.51792,0 0,33.80012 38.723329,0"
-       id="path5648"
        inkscape:connector-curvature="0" />
     <g
        id="g8590"
        ns0:preamble="/home/bqwer/workbook git/textext_preamble.tex"
        ns0:text="\\guillemotleft{1}\\guillemotright{}"
-       transform="translate(-94.52589,915.04251)">
+       transform="translate(-94.618218,915.90861)">
       <defs
          id="defs8592">
         <g
@@ -601,8 +596,13 @@
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 45.312499,959.78276 6.517857,-11.11608"
+       d="m 45.220164,960.64886 6.51786,-11.11608"
        id="path9697"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.00000024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 63.366194,955.09083 -38.723317,0 0,-33.80012 178.517893,0 0,42.91614 -18.27921,-10e-6"
+       id="path3478"
        inkscape:connector-curvature="0" />
   </g>
 </svg>

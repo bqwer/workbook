@@ -1,5 +1,5 @@
 //регистр счётчика
-reg [16:0] pulse_counter;
+reg [16:0] pulse_counter = "17'd0";
 
 //описание компаратора
 wire hundredth_of_second_passed = 
