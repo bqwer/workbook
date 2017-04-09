@@ -11,7 +11,7 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{RS_latch}
+	\includesvg{images/lab_2/RS_latch}
 	\caption{Структура \eng{RS}-защелки}
 \end{figure}
 
@@ -21,32 +21,31 @@
 \centering
 \begin{tikztimingtable}[%
     timing/dslope=0.1,
-    timing/.style={x=3ex,y=2ex},
+    timing/.style={x=6.5ex,y=2ex},
     very thick,
-    x=3ex,
+    x=4ex,
     timing/rowdist=3ex,
     timing/name/.style={font=\sffamily\scriptsize},
 ]
 
-	S  & 2L 8H \\
-	R  & 6H 4L \\
-	Q  & 6H 4L \\
+	S  & 1L 4H \\
+	R  & 3H 2L \\
+	Q  & 3H 2L \\
 \extracode
 \begin{pgfonlayer}{background}
-\draw [->,>=latex] (0,0ex) --  (30ex+1,0ex);
-\draw [->,>=latex] (0,-3ex) -- (30ex+1,-3ex);
-\draw [->,>=latex] (0,-6ex) -- (30ex+1,-6ex);
+\draw [->,>=latex] (0,0ex) --  (32.5ex+1,0ex);
+\draw [->,>=latex] (0,-3ex) -- (32.5ex+1,-3ex);
+\draw [->,>=latex] (0,-6ex) -- (32.5ex+1,-6ex);
 \draw [->,>=latex] (0,-6ex) -- (0,4ex);
 
-\node [align=center,scale=0.6,text width=7ex] at (2ex, -8ex) {Установка в \quotes{1}};
-\node [align=center,scale=0.6,text width=6ex] at (11ex,-8ex) {Хранение};
-\node [align=center,scale=0.6,text width=6ex] at (24ex,-8ex) {Сброс в \quotes{0}};
+\node [align=center,scale=0.6,text width=6ex] at (2ex, -8ex) {Установка\\в \quotes{1}};
+\node [align=center,scale=0.6,text width=6ex] at (12ex,-8ex) {Хранение};
+\node [align=center,scale=0.6,text width=6ex] at (26ex,-8ex) {Сброс в \quotes{0}};
 
 \begin{scope}[semitransparent ,semithick]
-\foreach \i in {6ex, 18ex} {
+\foreach \i in {6.5ex, 19.5ex} {
 \draw[darkgray,dotted] (\i,4ex) -- (\i,-10ex);
 }
-%\vertlines[darkgray,dotted]{6ex,18ex}
 \end{scope}
 \end{pgfonlayer}
 \end{tikztimingtable}
@@ -55,14 +54,14 @@
 
 \par{Опишем защелку на языке \eng{Verilog}, опираясь на её структуру, которую мы рассмотрели выше. Нам понадобятся два входа, два выхода и два элемента И-НЕ, которые мы опишем с помощью операций И (оператор \&) и НЕ (оператор \textasciitilde).}
 
-\lstinputlisting[caption={Описание \eng{RS}-защелки на языке \eng{Verilog HDL}}, ]{./code_examples/rs_latch.v}
+\lstinputlisting[caption={Описание \eng{RS}-защелки на языке \eng{Verilog HDL}}, ]{./code_examples/lab_2/rs_latch.v}
 		
 \par{Элемент памяти нам, прежде всего, нужен для хранения данных. Для того, чтобы защелкой стало удобнее пользоваться, немного изменим схему подключения управляющих сигналов.}
 
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{D_latch}
+	\includesvg{images/lab_2/D_latch}
 	\caption{Структура \eng{D}-защелки}
 \end{figure}
 		
@@ -108,14 +107,14 @@
 
 \par{Как мы уже говорили, использовать структурные описания не всегда удобно. В большинстве случаев использовать поведенческое описание намного эффективнее. Поведенческое описание часто формулируется гораздо лаконичнее, и, так как его легче понять человеку, улучшается читаемость кода и уменьшается вероятность ошибок при его написании.}
 
-\lstinputlisting[caption={Поведенческое описание \eng{D}-защелки на языке \eng{Verilog HDL}}, ]{./code_examples/d_latch.v}
+\lstinputlisting[caption={Поведенческое описание \eng{D}-защелки на языке \eng{Verilog HDL}}, ]{./code_examples/lab_2/d_latch.v}
 		
 \par{Если добавить к этой схеме еще две защелки, то можно привязать изменение \quotes{содержимого} защелки к переходу управляющего сигнала из \quotes{0} в \quotes{1}, то получим следующую структуру:}
 
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{dff_struct}
+	\includesvg{images/lab_2/dff_struct}
 	\caption{Структура \eng{D}-триггера}
 \end{figure}
 		
@@ -124,11 +123,12 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{dff}
+	\includesvg{images/lab_2/dff}
 	\caption{Графическое обозначение \eng{D}-триггера}
 \end{figure}
 		
 \par{Эта схема получила широчайшее применение в цифровой схемотехнике и называется \eng{d}-триггер (от слова \qeng{data} — данные). Ниже приведена временная диаграмма работы \eng{d}-триггера.}
+
 
 \begin{figure}[H]
 \centering
@@ -209,22 +209,29 @@
 \end{tikztimingtable}
 \caption{Пример работы регистра}
 \end{figure}
+
+
+
 	
 \par{Заметим, что сигнал \eng{C} называют \quotes{тактирующим} сигналом или \quotes{сигналом синхронизации}. Обычно в роли этого сигнала выступает сигнал от внешнего источника (чаще всего кварцевого резонатора) со стабильной частотой. А сами цифровые устройства, для работы которых необходим сигнал синхронизации, называют синхронными.}
 
 \par{Сигнал синхронизации играет очень большую роль в цифровых устройствах. Прежде всего, он необходим для того, чтобы избежать непредсказуемого и нестабильного поведения триггеров в цифровых устройствах.}
 
-\lstinputlisting[caption={Описание \eng{D}-триггера на языке \eng{Verilog HDL}}, ]{./code_examples/d_flipflop.v}
+\lstinputlisting[caption={Описание \eng{D}-триггера на языке \eng{Verilog HDL}}, ]{./code_examples/lab_2/d_flipflop.v}
 		
 \par{В описании появилось новое ключевое слово \eng{posedge}. Оно используется только в списке чувствительности блока \eng{always} и означает событие перехода сигнала, имя которого стоит после этого ключевого слова, из состояния \quotes{0} в состояние \quotes{1}.}
-				
+		
+		
 \par{Ключевое слово \eng{posedge} было введено прежде всего для того, чтобы описывать схемы, содержащие триггеры. Ведь триггеры, как мы уже говорили, могут менять своё состояние только в момент положительного фронта (англ. \eng{positive edge}) сигнала синхронизации.}
+		
 		
 \par{Добавление в список чувствительности события \eng{posedge rst} позволяет описать поведение триггера в момент асинхронного сброса: как только случается переход \eng{rst} из \quotes{0} в \quotes{1} срабатывает блок \eng{always} и проверка условия \kword{if} (\eng{rst}) дает положительный результат, триггер сбрасывается в \quotes{0}.}
 
+\par{}
+
 \par{Если объединить несколько триггеров в группу, то получится то, что в цифровой схемотехнике называют \quotes{регистр}.}
 
-\lstinputlisting[caption={Описание регистра на языке \eng{Verilog HDL}}, ]{./code_examples/register.v}
+\lstinputlisting[caption={Описание регистра на языке \eng{Verilog HDL}}, ]{./code_examples/lab_2/register.v}
 		
 \par{Элементы памяти позволяют нам сохранять информацию для дальнейшей обработки или хранить готовый результат вычисления, хранить промежуточные результаты.}
 
@@ -232,7 +239,7 @@
 
 \par{Необходимо отметить важную концепцию языка \eng{Verilog}. \textbf{Переменные типа \eng{reg} могут быть изменены только в пределах одного блока \eng{always}. Переменные доступны для проверки в любом из блоков, но изменять их значение можно только в одном из них.}}	
 
-\lstinputlisting[caption={Пример присвоения значения переменной а разных блоках \eng{always} на языке \eng{Verilog HDL}}, ]{./code_examples/error_example_2.v}
+\lstinputlisting[caption={Пример присвоения значения переменной а разных блоках \eng{always} на языке \eng{Verilog HDL}}, ]{./code_examples/lab_2/error_example.v}
 
 \par{Одной из простейших, и в тоже время широко распространённой, цифровой схемой на основе регистров является счётчик.}
 
@@ -240,14 +247,18 @@
 		
 \par{Такая простая схема, тем не менее, используется практически в каждом цифровом устройстве. Как будет показано дальше, счётчик легко можно доработать таким образом, чтобы отсчитывались не такты, а какие-то события. Например, событиями могут быть: нажатие кнопки, принятие пакета данных, срабатывание датчика, выполнение какого-то условия (периодическое) и другое.}		
 
+\par{}
+
 \par{Итак, для того чтобы реализовать счетчик нам понадобится регистр и сумматор. Причем сумматор будет складывать значение, хранящееся в регистре с константой (в нашем случае единицей) а результат сложения будет поступать на вход регистра.}		
 		
+\par{}
+
 \par{В результате получим следующую схему:}
 
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{counter}
+	\includesvg{images/lab_2/counter}
 	\caption{Структура восьмибитного счетчика}
 \end{figure}
 		
@@ -285,7 +296,7 @@
 	
 \par{Опишем поведение такого счётчика на \eng{Verilog}.}
 
-\lstinputlisting[caption={Описание восьмиитного счетчика на языке \eng{Verilog HDL}}, ]{./code_examples/counter_8bit.v}
+\lstinputlisting[caption={Описание восьмиитного счетчика на языке \eng{Verilog HDL}}, ]{./code_examples/lab_2/counter.v}
 		
 \par{Для того чтобы можно было подсчитывать события, а не переходы сигнала синхронизации из \quotes{0} в \quotes{1} понадобится ввести еще одну схему. Её смысл и назначение заключается в следующем: нам необходимо из асинхронного события получить синхронный сигнал единичной длительности. Тогда, подавая такой сигнал на вход \eng{enable} счётчика, мы сможем считать количество произошедших событий.}
 		
@@ -294,8 +305,8 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{register_2}
-	\caption{Структура схемы синхронизации сигнала}
+	\includesvg{images/lab_2/register}
+	\caption{Структура регистра на \eng{D}-триггерах}
 \end{figure}
 
 \begin{figure}[H]
@@ -319,7 +330,7 @@
 \draw [->,>=latex] (0,-6ex) -- (0,3ex);
 \end{pgfonlayer}
 \end{tikztimingtable}
-\caption{Пример поведения схемы}
+\caption{Пример работы регистра}
 \end{figure}
 
 \par{Естественно такая схема работает только тогда, когда входной сигнал изменяется с частотой меньшей, чем частота синхронизации.}
@@ -346,7 +357,7 @@
 
 \par{Событием является наличие 3 и более единиц на SW[9:0] в момент записи в регистр.}
 
-\lstinputlisting[caption={Решение индивидуального задания (фрагмент кода лабораторной работы)}, ]{./code_examples/task_solution_2.v}
+\lstinputlisting[caption={Решение индивидуального задания (фрагмент кода лабораторной работы)}, ]{./code_examples/lab_2/task_solution.v}
 		
 \section{Вопросы к защите лабораторной работы}
 

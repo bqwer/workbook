@@ -24,13 +24,13 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{blackbox_3}
+	\includesvg{images/lab_3/blackbox}
 	\caption{Описание входов и выходов секундомера}
 \end{figure}
 
 \par{Начнём описывать модуль на языке \eng{Verilog}:}
 
-\lstinputlisting[caption={Описание входов и выходов модуля на языке \eng{Verilog HDL}}, ]{./code_examples/stopwatch_module.v}
+\lstinputlisting[caption={Описание входов и выходов модуля на языке \eng{Verilog HDL}}, ]{./code_examples/lab_3/stopwatch_module.v}
 
 \par{Теперь приступим к описанию \quotes{внутренностей} модуля.}
 
@@ -45,7 +45,7 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{counter_3}
+	\includesvg{images/lab_3/counter}
 	\caption{Структура счетчика}
 \end{figure}
 
@@ -57,7 +57,7 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{count_comp_3}
+	\includesvg{images/lab_3/count_comp}
 	\caption{Структура счетчика с компаратором}
 \end{figure}
 
@@ -135,7 +135,7 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{sync_reset}
+	\includesvg{images/lab_3/sync_reset}
 	\caption{Схема реализации синхронного сброса}
 \end{figure}
 
@@ -202,13 +202,13 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{pulse_counter}
+	\includesvg{images/lab_3/pulse_counter}
 	\caption{Схема счетчика тысячных долей секунды}
 \end{figure}
 
 \par{Когда мы представили схему в виде набора цифровых блоков, мы можем описать её поведение на языке \eng{Verilog}:}
 
-\lstinputlisting[caption={Описание счетчика тактовых импульсов на языке \eng{Verilog HDL}}, ]{./code_examples/pulse_counter.v}
+\lstinputlisting[caption={Описание счетчика тактовых импульсов на языке \eng{Verilog HDL}}, ]{./code_examples/lab_3/pulse_counter.v}
 
 \par{Теперь, когда у нас есть счетчик, отсчитывающий такты и сигнализирующий о том, что прошла сотая доля секунды, мы можем отсчитывать сотые доли секунды.}
 
@@ -219,7 +219,7 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{timer_struct_3_1}
+	\includesvg{images/lab_3/timer_struct_1}
 	\caption{Первый пример реализации секундомера}
 \end{figure}
 
@@ -230,7 +230,7 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{timer_struct_3_2}
+	\includesvg{images/lab_3/timer_struct_2}
 	\caption{Второй пример реализации секундомера}
 \end{figure}
 
@@ -289,13 +289,13 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{hundredth_counter}
+	\includesvg{images/lab_3/hundredth_counter}
 	\caption{Схема счётчика сотых долей секунды}
 \end{figure}
 
 \par{Скорректируем описание её работы на \eng{Verilog}:}
 
-\lstinputlisting[caption={Описание счетчика сотых долей секунды на языке \eng{Verilog HDL}}, ]{./code_examples/hundredth_counter.v}
+\lstinputlisting[caption={Описание счетчика сотых долей секунды на языке \eng{Verilog HDL}}, ]{./code_examples/lab_3/hundredth_counter.v}
 
 \par{Счётчики десятых долей секунды, целых секунд и десятков секунд устроены абсолютно также. В описаниях изменятся только названия сигналов и регистров. Единственное в чем необходимо быть внимательным – это подключение сигналов. Для правильного подключения надо свериться со схемой, которую мы выбрали ранее.}
 
@@ -310,13 +310,13 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{register_2}
+	\includesvg{images/lab_2/register}
 	\caption{Структура схемы синхронизации сигнала}
 \end{figure}
 
 \par{Поведение такой схемы описывается на языке \eng{Verilog} следующим образом:}
 
-\lstinputlisting[caption={Описание схемы синхранизации на языке \eng{Verilog HDL}}, ]{./code_examples/button_syncroniser.v}
+\lstinputlisting[caption={Описание схемы синхранизации на языке \eng{Verilog HDL}}, ]{./code_examples/lab_3/button_syncroniser.v}
 
 \par{Эта схема и её описание подробно рассмотрены в лабораторной работе №3}
 
@@ -329,7 +329,7 @@
 \begin{figure}[H]
 	\centering
 	\def\svgwidth{\columnwidth}
-	\includesvg{device_stopped}
+	\includesvg{images/lab_3/device_stopped}
 	\caption{Схема переключения сигнала \qeng{device\_running}}
 \end{figure}
 
@@ -357,7 +357,7 @@
 
 \par{Теперь приведем полное описание секундомера (за исключением схемы, вырабатывающей сигнал \qeng{device\_stopped}), выполненное на языке \eng{Verilog}:}
 
-\lstinputlisting[caption={Описание секундомера на языке \eng{Verilog HDL}}, ]{./code_examples/stopwatch.v}
+\lstinputlisting[caption={Описание секундомера на языке \eng{Verilog HDL}}, ]{./code_examples/lab_3/stopwatch.v}
 
 \section{Задание лабораторной работы:}
 
