@@ -13,8 +13,8 @@ always @(x) begin
     3'b101: decoder_output <= 4'b1101;
     3'b110: decoder_output <= 4'b0000;
     3'b111: decoder_output <= 4'b0010;
-  endcase;
-end;
+  endcase
+end
 
 assign y = decoder_output;
 
