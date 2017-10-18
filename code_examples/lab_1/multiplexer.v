@@ -13,8 +13,8 @@ always @(a,b,c,d,s) begin
     3'b10:   y <= c;
     3'b11:   y <= d;
     default: y <= a;
-  endcase;
-end;
+  endcase
+end
 
 endmodule;
 
